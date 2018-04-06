@@ -1,0 +1,12 @@
+body {
+    background-image: url("https://fthmb.tqn.com/gMyO_KVv02CLSLwQQ1zk7oa5VZw=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/flames-82087438-59ff1d2bb39d030019906514.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: red;
+}
+
+img {
+    width: 500px;
+    height: 350px;
+}
+
