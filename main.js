@@ -2,6 +2,12 @@ const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 };
 
+const addButtonEventListener = () => {
+    const button = document.getElementById('button');
+    const userInput = 
+    button.addEventListener('click', startApplication());
+};
+
 const buildDomString = (player) => {
     let domString = "";
     for (let i=0; i < player.length; i++) {
@@ -18,7 +24,7 @@ const startApplication = (player) => {
     let myRequest = new XMLHttpRequest();
     myRequest.addEventListener("load", executeThisCodeAfterFileLoaded);
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
-    myRequest.open("GET", `https://teamtreehouse.com/${player.profile_name}.json`);
+    myRequest.open("GET", `https://teamtreehouse.com/${inputPlayerUsername}.json`);
     myRequest.send();
 }
 
@@ -31,4 +37,4 @@ function executeThisCodeAfterFileLoaded () {
     buildDomString(data);
 }
 
-startApplication();
+addButtonEventListener();
