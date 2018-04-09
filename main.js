@@ -1,12 +1,18 @@
+let selectedPlayer = "";
+
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 };
 
 const addButtonEventListener = () => {
     const button = document.getElementById('button');
-    const userInput = 
-    button.addEventListener('click', startApplication());
+    // const userInput = 
+    button.addEventListener('click', selectPlayer);
 };
+
+const selectPlayer = e => {
+    selectedPlayer = e.target.dataSet
+}
 
 const buildDomString = (player) => {
     let domString = "";
@@ -20,11 +26,11 @@ const buildDomString = (player) => {
     printToDom(domString, 'player-card-holder');
 }
 
-const startApplication = (player) => {
+const playerRequest = () => {
     let myRequest = new XMLHttpRequest();
     myRequest.addEventListener("load", executeThisCodeAfterFileLoaded);
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
-    myRequest.open("GET", `https://teamtreehouse.com/${inputPlayerUsername}.json`);
+    myRequest.open("GET", `https://teamtreehouse.com/thomasdugan.json`);
     myRequest.send();
 }
 
