@@ -18,14 +18,21 @@ button.addEventListener('click', (e) => {
 });
 
 const printWinner = (playerUno, playerDos) => {
+    
     let winningPlayer = "";
-    if (playerUno > playerDos) {
-        winningPlayer += `<h2> WINNER </h2>`;
-        winningPlayer += `Player 1`;
-    } else if (playerUno < playerDos) {
-        winningPlayer += `<h2> WINNER </h2>`;
-        winningPlayer += `Player 2`;
+
+    if (playerUno[points] > playerDos[points]) {
+        winningPlayer += `<div class="panel-heading">`;
+        winningPlayer +=    `<h2 class="panel-title"> WINNER </h2>`;
+        winningPlayer += `</div>`;
+        winningPlayer += `<div class="panel-body">${playerUno[name]}</div>`;
+    } else if (playerUno[points] < playerDos[points]) {
+        winningPlayer += `<div class="panel-heading">`;
+        winningPlayer +=    `<h2 class="panel-title"> WINNER </h2>`;
+        winningPlayer += `</div>`;
+        winningPlayer += `<div class="panel-body">${playerDos[name]}</div>`;
     }
+    
     printToDom(winningPlayer, 'winner')
 }
 
@@ -36,17 +43,28 @@ const buildDomString = (player) => {
     domString +=    `<img src="${player.gravatar_url}">`;
     domString +=    `<p>${player.points.total}</p>`;
     domString += `</div>`;
+    let firstPlayer = [];
+    let secondPlayer = [];
     
     if (counter === 1) {
+        firstPlayer = {
+            points: `${player.points.total}`, 
+            name: `${player.name}`, 
+            image: `${player.gravatar_url}`,
+        }
         playerOneScore = `${player.points.total}`;
     } else if (counter === 2) {
-        playerTwoScore = `${player.points.total}`;
+        secondPlayer = {
+            points: `${player.points.total}`, 
+            name: `${player.name}`, 
+            image: `${player.gravatar_url}`,
+        }
     }
     printToDom(domString, `player${counter}-card-holder`);
     counter++;
 
     if (counter === 3) {
-        printWinner(playerOneScore, playerTwoScore);
+        printWinner(firstPlayer, secondPlayer);
     }
 
     // let winningDomString = "";

@@ -17,3 +17,7 @@ h2 {
 .white, h4 {
     color: white;
 }
+
+.button {
+    margin: 25px;
+}
