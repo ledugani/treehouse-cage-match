@@ -13,7 +13,7 @@
 
     <h4>Instructions: Enter the Treehouse username of the player you wish to choose for battle.</h4>
 
-    <p>Example: Krissy Caron's URL is 
+    <p class="white">Example: Krissy Caron's URL is 
       <br>
       <em>https://teamtreehouse.com/krissycaron</em>
       <br>
@@ -28,8 +28,9 @@
           <div class="panel-heading">
             <h3 class="panel-title">Player 1</h3>
           </div>
-          <div id="player-card-holder" class="panel-body">
-            <input>
+          <div class="panel-body">
+            <input id="player1">
+            <div id="player1-card-holder"></div>
           </div>
         </div>
       </div>
@@ -38,15 +39,16 @@
           <div class="panel-heading">
             <h3 class="panel-title">Player 2</h3>
           </div>
-          <div id="player-card-holder" class="panel-body">
-            <input>
+          <div class="panel-body">
+            <input id="player2">
+            <div id="player2-card-holder"></div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <button type="button" class="btn btn-danger">FIGHT</button>
+      <button type="button" id="button" class="btn btn-danger">FIGHT</button>
     </div>
 
     <script src="main.js"></script>
