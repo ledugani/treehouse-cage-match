@@ -1,4 +1,6 @@
 let counter = 1;
+let playerOneScore;
+let playerTwoScore;
 
 const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
@@ -15,6 +17,10 @@ button.addEventListener('click', (e) => {
     playerRequest(playerTwo);
 });
 
+const changeWinner = (e) => {
+
+}
+
 const buildDomString = (player) => {
     let domString = "";
     domString += `<div id="${player.profile_name}">`;
@@ -22,9 +28,26 @@ const buildDomString = (player) => {
     domString +=    `<img src="${player.gravatar_url}">`;
     domString +=    `<p>${player.points.total}</p>`;
     domString += `</div>`;
-    console.log(`player${counter}-card-holder`);
+    
+    if (counter === 1) {
+        playerOneScore = `${player.points.total}`;
+    } else if (counter === 2) {
+        playerTwoScore = `${player.points.total}`;
+    }
     printToDom(domString, `player${counter}-card-holder`);
     counter++;
+
+    let winningDomString = "";
+
+    if (playerOneScore > playerTwoScore && counter === 2) {
+
+        winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
+        printToDom(winningDomString, `winner`);
+    } else if (playerTwoScore > playerOneScore && counter === 2) {
+
+        winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
+        printToDom(winningDomString, `winner`);
+    }
 }
 
 const playerRequest = (user) => {
@@ -42,5 +65,4 @@ function executeThisCodeIfXHRFails () {
 function executeThisCodeAfterFileLoaded () {
     const data = JSON.parse(this.responseText);
     buildDomString(data);
-    console.log(data);
 }
