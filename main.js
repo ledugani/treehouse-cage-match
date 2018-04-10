@@ -17,8 +17,16 @@ button.addEventListener('click', (e) => {
     playerRequest(playerTwo);
 });
 
-const changeWinner = (e) => {
-
+const printWinner = (playerUno, playerDos) => {
+    let winningPlayer = "";
+    if (playerUno > playerDos) {
+        winningPlayer += `<h2> WINNER </h2>`;
+        winningPlayer += `Player 1`;
+    } else if (playerUno < playerDos) {
+        winningPlayer += `<h2> WINNER </h2>`;
+        winningPlayer += `Player 2`;
+    }
+    printToDom(winningPlayer, 'winner')
 }
 
 const buildDomString = (player) => {
@@ -37,17 +45,21 @@ const buildDomString = (player) => {
     printToDom(domString, `player${counter}-card-holder`);
     counter++;
 
-    let winningDomString = "";
-
-    if (playerOneScore > playerTwoScore && counter === 2) {
-
-        winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
-        printToDom(winningDomString, `winner`);
-    } else if (playerTwoScore > playerOneScore && counter === 2) {
-
-        winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
-        printToDom(winningDomString, `winner`);
+    if (counter === 3) {
+        printWinner(playerOneScore, playerTwoScore);
     }
+
+    // let winningDomString = "";
+
+    // if (playerOneScore > playerTwoScore && counter === 2) {
+
+    //     winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
+    //     printToDom(winningDomString, `winner`);
+    // } else if (playerTwoScore > playerOneScore && counter === 2) {
+
+    //     winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
+    //     printToDom(winningDomString, `winner`);
+    // }
 }
 
 const playerRequest = (user) => {
