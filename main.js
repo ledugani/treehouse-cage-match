@@ -21,16 +21,16 @@ const printWinner = (playerUno, playerDos) => {
     
     let winningPlayer = "";
 
-    if (playerUno[points] > playerDos[points]) {
+    if (playerUno > playerDos) {
         winningPlayer += `<div class="panel-heading">`;
         winningPlayer +=    `<h2 class="panel-title"> WINNER </h2>`;
         winningPlayer += `</div>`;
-        winningPlayer += `<div class="panel-body">${playerUno[name]}</div>`;
-    } else if (playerUno[points] < playerDos[points]) {
+        winningPlayer += `<div class="panel-body">Player 1</div>`;
+    } else if (playerUno < playerDos) {
         winningPlayer += `<div class="panel-heading">`;
         winningPlayer +=    `<h2 class="panel-title"> WINNER </h2>`;
         winningPlayer += `</div>`;
-        winningPlayer += `<div class="panel-body">${playerDos[name]}</div>`;
+        winningPlayer += `<div class="panel-body">Player 2</div>`;
     }
     
     printToDom(winningPlayer, 'winner')
@@ -43,28 +43,29 @@ const buildDomString = (player) => {
     domString +=    `<img src="${player.gravatar_url}">`;
     domString +=    `<p>${player.points.total}</p>`;
     domString += `</div>`;
-    let firstPlayer = [];
-    let secondPlayer = [];
+    // let firstPlayer = [];
+    // let secondPlayer = [];
     
     if (counter === 1) {
-        firstPlayer = {
-            points: `${player.points.total}`, 
-            name: `${player.name}`, 
-            image: `${player.gravatar_url}`,
-        }
+        // firstPlayer = {
+        //     points: `${player.points.total}`, 
+        //     name: `${player.name}`, 
+        //     image: `${player.gravatar_url}`,
+        // }
         playerOneScore = `${player.points.total}`;
     } else if (counter === 2) {
-        secondPlayer = {
-            points: `${player.points.total}`, 
-            name: `${player.name}`, 
-            image: `${player.gravatar_url}`,
-        }
+        // secondPlayer = {
+        //     points: `${player.points.total}`, 
+        //     name: `${player.name}`, 
+        //     image: `${player.gravatar_url}`,
+        // }
+        playerTwoScore = `${player.points.total}`;
     }
     printToDom(domString, `player${counter}-card-holder`);
     counter++;
 
     if (counter === 3) {
-        printWinner(firstPlayer, secondPlayer);
+        printWinner(playerOneScore, playerTwoScore);
     }
 
     // let winningDomString = "";
