@@ -1,4 +1,6 @@
 let counter = 1;
+let player1;
+let player2;
 let playerOneScore;
 let playerTwoScore;
 
@@ -11,14 +13,16 @@ button.addEventListener('click', (e) => {
     //player one
     let playerOne = document.getElementById("player1").value;
     playerRequest(playerOne);
+    getPlayer1Info();
 
     //player two
     let playerTwo = document.getElementById("player2").value;
     playerRequest(playerTwo);
+    getPlayer2Info();
 });
 
 const printWinner = (playerUno, playerDos) => {
-    
+
     let winningPlayer = "";
 
     if (playerUno > playerDos) {
@@ -32,7 +36,7 @@ const printWinner = (playerUno, playerDos) => {
         winningPlayer += `</div>`;
         winningPlayer += `<div class="panel-body">Player 2</div>`;
     }
-    
+
     printToDom(winningPlayer, 'winner')
 }
 
@@ -43,22 +47,10 @@ const buildDomString = (player) => {
     domString +=    `<img src="${player.gravatar_url}">`;
     domString +=    `<p>${player.points.total}</p>`;
     domString += `</div>`;
-    // let firstPlayer = [];
-    // let secondPlayer = [];
-    
+
     if (counter === 1) {
-        // firstPlayer = {
-        //     points: `${player.points.total}`, 
-        //     name: `${player.name}`, 
-        //     image: `${player.gravatar_url}`,
-        // }
         playerOneScore = `${player.points.total}`;
     } else if (counter === 2) {
-        // secondPlayer = {
-        //     points: `${player.points.total}`, 
-        //     name: `${player.name}`, 
-        //     image: `${player.gravatar_url}`,
-        // }
         playerTwoScore = `${player.points.total}`;
     }
     printToDom(domString, `player${counter}-card-holder`);
@@ -67,19 +59,25 @@ const buildDomString = (player) => {
     if (counter === 3) {
         printWinner(playerOneScore, playerTwoScore);
     }
-
-    // let winningDomString = "";
-
-    // if (playerOneScore > playerTwoScore && counter === 2) {
-
-    //     winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
-    //     printToDom(winningDomString, `winner`);
-    // } else if (playerTwoScore > playerOneScore && counter === 2) {
-
-    //     winningDomString += `<h3>The winner is ${player.profile_name}!</h3>`;
-    //     printToDom(winningDomString, `winner`);
-    // }
 }
+
+const setPlayer1Info = (player1Array) => {
+    player1 = player1Array;
+    buildDomString(player1);
+};
+
+const getPlayer1Info = () => {
+    return player1;
+};
+
+const setPlayer2Info = (player2Array) => {
+    player2 = player2Array;
+    buildDomString(player2);
+};
+
+const getPlayer2Info = () => {
+    return player2;
+};
 
 const playerRequest = (user) => {
     let myRequest = new XMLHttpRequest();
@@ -90,10 +88,14 @@ const playerRequest = (user) => {
 }
 
 function executeThisCodeIfXHRFails () {
-    console.log("something broke")
+    console.error("something broke");
 }
 
 function executeThisCodeAfterFileLoaded () {
     const data = JSON.parse(this.responseText);
-    buildDomString(data);
+    if (counter === 1) {
+        setPlayer1Info(data);
+    } else if (counter === 2) {
+        setPlayer2Info(data);
+    }
 }
