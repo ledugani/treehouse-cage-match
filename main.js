@@ -13,12 +13,13 @@ button.addEventListener('click', (e) => {
     //player one
     let playerOne = document.getElementById("player1").value;
     playerRequest(playerOne);
-    getPlayer1Info();
+    //need to know how to actually access the data
+    const player1info = getPlayer1Info();
 
     //player two
     let playerTwo = document.getElementById("player2").value;
     playerRequest(playerTwo);
-    getPlayer2Info();
+    const player2info = getPlayer2Info();
 });
 
 const printWinner = (playerUno, playerDos) => {
@@ -68,6 +69,7 @@ const setPlayer1Info = (player1Array) => {
 
 const getPlayer1Info = () => {
     return player1;
+    console.log(player1);
 };
 
 const setPlayer2Info = (player2Array) => {
